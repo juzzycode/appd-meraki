@@ -1,0 +1,29 @@
+<monitor>
+    <name>MerakiMonitor</name>
+    <type>managed</type>
+    <enabled>true</enabled>
+    <enable-override os-type="solaris">true</enable-override>
+    <enable-override os-type="sunos">true</enable-override>
+    <description>Monitors Meraki devices
+    </description>
+    <monitor-configuration>
+    </monitor-configuration>
+    <monitor-run-task>
+        <execution-style>continuous</execution-style>
+        <name>Run</name>
+        <type>executable</type>
+        <task-arguments>
+        </task-arguments>
+        <executable-task>
+            <type>file</type>
+            <file os-type="linux">meraki.sh</file>
+	    <!--            <file os-type="mac">macos-stat.sh</file>
+            <file os-type="windows">windows-stat.bat</file>
+            <file os-type="solaris">solaris-stat-run.sh</file>
+            <file os-type="sunos">solaris-stat-run.sh</file>
+            <file os-type="aix">aix-stat.sh</file>
+            <file os-type="z/os">zos-stat.sh</file>
+	    <file os-type="hp-ux">hpux-stat.sh</file> -->
+        </executable-task>
+    </monitor-run-task>
+</monitor>
