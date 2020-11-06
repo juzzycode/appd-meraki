@@ -5,7 +5,7 @@ p=`dirname $(realpath $0)`
 . $p/config.sh
 
 #this is the result
-# [{"name":"","serial":"Q3AB-6PSK-2KD2","mac":"98:18:88:fe:6b:b4","publicIp":"24.158.108.92","networkId":"L_615304299089505647","status":"online","lastReportedAt":"2020-11-05T21:20:53.905000Z","lanIp":"192.168.50.8","gateway":"192.168.50.3","ipType":"dhcp","primaryDns":"192.168.50.67","secondaryDns":null}]
+# [{"name":"","serial":"XXXX-XXXX-XXXX","mac":"98:XX:XX:XX:XX:XX","publicIp":"4.5.8.9","networkId":"L_12344234234234","status":"online","lastReportedAt":"2020-11-05T21:20:53.905000Z","lanIp":"192.168.0.8","gateway":"192.168.0.3","ipType":"dhcp","primaryDns":"192.168.50.6","secondaryDns":null}]
 while true; do
 	x=`curl -s --location --request GET "https://api.meraki.com/api/v1/organizations/$ORG_ID/devices/statuses" --header "X-Cisco-Meraki-API-Key: $API_KEY"`
 
