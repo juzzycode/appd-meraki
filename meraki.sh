@@ -37,17 +37,22 @@ done
 while true; do
 	x=`curl -s --location --request GET "https://api.meraki.com/api/v1/organizations/$ORG_ID/devices/statuses" --header "X-Cisco-Meraki-API-Key: $API_KEY"`
 
-	echo $x |jq -r '.[] | "\(.networkId) \(.mac) \(.status)"' | while read n m s; do 
-		newMac=`echo $m | sed 's/://g'`
+	echo $x |jq -r '.[] | "\(.networkId) \(.name) \(.mac) \(.status)"' | while read n name m s; do 
+
+		# if there's a Name set, use that, otherwise use mac. in either case, strip colons
+		if [[ $name == "" ]];then deviceName=`echo $m | sed 's/://g'`; else deviceName=`echo $name | sed 's/://g'`; fi
+		#convert status to a number
 		if [[ "$s" == "online" ]] ; then s=1; else s=0; fi
+		#if we have the network name cached, use that, otherwise go fetch the new network change.
 		if  [[  ${netNAmes[$n]} == "" ]]; then
 			load_networks
 			. network.config
 		fi
+		#if there's a name in the lookup config, use that. otherwise use just the network id.
 		if [[ ${netNAmes[$n]} != "" ]]; then
-			echo "name=Custom Metrics|Meraki|Networks|${netNAmes[$n]}|$newMac,value=$s"
+			echo "name=Custom Metrics|Meraki|Networks|${netNAmes[$n]}|$deviceName,value=$s"
 		else
-			echo "name=Custom Metrics|Meraki|Networks|$n|$newMac,value=$s"
+			echo "name=Custom Metrics|Meraki|Networks|$n|$deviceName,value=$s"
 		fi
 	done
 	sleep 60
