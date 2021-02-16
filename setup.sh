@@ -13,7 +13,7 @@ fi
 dir=`dirname $(realpath $0)`
 cd $dir
 
-if [ -f XXXconfig.sh ]; then
+if [ -f config.sh ]; then
 	echo "$dir/config.sh exists, remove it and try again"
 	exit 1
 fi
